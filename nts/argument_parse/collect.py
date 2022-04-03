@@ -34,7 +34,8 @@ class Arguments:
                     dest=arg.get("name"),
                     type=type_of_argument,
                     nargs=nargs_translate(arg.get("multiple")),
-                    required=arg.get("required")
+                    required=arg.get("required"),
+                    default=arg.get("default")
                 )
             if arg.get("type") == "boolean":
                 self.parser.add_argument(
