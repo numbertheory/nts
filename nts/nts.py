@@ -1,8 +1,7 @@
 #! /usr/bin/env python3
 
-import argument_parse.collect
+from nts.argument_parse import collect
+import os
 
-d = argument_parse.collect.Arguments("arguments.yaml")
-print(d.value("config"))
-print(d.value("number"))
-print(d.value("flag"))
+def config(config_file):
+    return collect.Arguments(os.path.dirname(__file__) + '/../' + config_file)

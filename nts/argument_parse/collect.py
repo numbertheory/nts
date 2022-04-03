@@ -2,7 +2,6 @@
 # Handle argument parsing in one place
 import argparse
 import yaml
-import os
 
 def store_translate(default):
     if default:
@@ -18,7 +17,7 @@ def nargs_translate(nargs_value):
 
 class Arguments:
     def __init__(self, config):
-        with open(os.path.dirname(__file__) + '/../' + config) as f:
+        with open(config) as f:
             config_args = yaml.safe_load(f)
         self.parser = argparse.ArgumentParser(description=config_args.get("description"))
         self.arguments = config_args.get("arguments")

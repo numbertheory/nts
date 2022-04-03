@@ -3,7 +3,7 @@ arguments:
   - name: config
     required: False
     type: string
-    multiple: True
+    multiple: False
     flags:
       - c
       - config
