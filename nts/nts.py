@@ -9,6 +9,7 @@ class Config:
         self.args = os.path.dirname(__file__) + '/../' + args_file
         self.file_path = os.path.expanduser(collect.Arguments(self.args).value("config"))
         self.journal = collect.Arguments(self.args).value("journal")
+        self.debug = collect.Arguments(self.args).value("debug")
 
     def values(self):
         return toml.load(self.file_path)
@@ -31,3 +32,9 @@ def check_for_configuration(config):
             config_file.write(toml.dumps(default_toml))
             print("Configuration created.")
         return Config("arguments.yaml").values()
+
+def check_for_journal(journal_path):
+    if os.path.isfile(journal_path.get("journal_path", "")):
+        return "it's there"
+    else:
+        return "it's not there"

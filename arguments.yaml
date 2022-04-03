@@ -18,3 +18,11 @@ arguments:
       - j
       - journal
     help: "select journal to read from"
+  - name: debug
+    required: False
+    type: boolean
+    default: False
+    flags:
+      - d
+      - debug
+    help: "debug mode"
