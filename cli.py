@@ -1,6 +1,7 @@
 from nts import nts
 
 
-config = nts.config("arguments.yaml")
+config = nts.Config("arguments.yaml")
 
-print(config.value("config"))
+print(config.file_path)
+print(config.values())
