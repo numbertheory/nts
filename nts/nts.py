@@ -3,6 +3,7 @@
 from nts.argument_parse import collect
 import toml
 import os
+import json
 
 class Config:
     def __init__(self, args_file):
@@ -33,8 +34,14 @@ def check_for_configuration(config):
             print("Configuration created.")
         return Config("arguments.yaml").values()
 
-def check_for_journal(journal_path):
-    if os.path.isfile(journal_path.get("journal_path", "")):
-        return "it's there"
+def check_for_journal(journal):
+    journal_path = journal.get("journal_path", "")
+    if os.path.isfile(journal_path):
+        return True
     else:
-        return "it's not there"
+        print("Creating journal at {}".format(journal_path))
+        os.makedirs(os.path.dirname(journal_path))
+        blank_journal = {"posts": []}
+        with open(journal_path, "w") as journal_file:
+            journal_file.write(json.dumps(blank_journal))
+        return True
