@@ -11,7 +11,7 @@ arguments:
   - name: number
     required: False
     type: integer
-    multiple: True
+    multiple: False
     flags:
       - n
       - number
