@@ -3,6 +3,7 @@ arguments:
   - name: config
     required: False
     type: string
+    multiple: True
     flags:
       - c
       - config
@@ -15,3 +16,11 @@ arguments:
       - n
       - number
     help: "use a number"
+  - name: flag
+    required: False
+    default: False
+    type: boolean
+    flags:
+      - f
+      - flag
+    help: "set a flag"
