@@ -1,0 +1,17 @@
+description: Note To Self (nts)
+arguments:
+  - name: config
+    required: False
+    type: string
+    flags:
+      - c
+      - config
+    help: "set path to config file"
+  - name: number
+    required: False
+    type: integer
+    multiple: True
+    flags:
+      - n
+      - number
+    help: "use a number"
