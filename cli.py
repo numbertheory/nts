@@ -1,14 +1,18 @@
+#! /usr/bin/env python3
 from nts import nts
 import os
 
 
 args = nts.Config("arguments.yaml")
 
+def debug_output(config_set, args):
+    print(config_set.get(args.journal))
+
 def run_cli():
     config_set = nts.check_for_configuration(args)
     if config_set.get(args.journal):
         if args.debug:
-            print(config_set.get(args.journal))
+            debug_output(config_set, args)
         journal_check = nts.check_for_journal(config_set.get(args.journal))
         if journal_check:
             return [journal_check, 0]
