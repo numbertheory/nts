@@ -9,3 +9,12 @@ arguments:
       - c
       - config
     help: "set path to config file"
+  - name: journal
+    required: False
+    type: string
+    multiple: False
+    default: "default"
+    flags:
+      - j
+      - journal
+    help: "select journal to read from"
