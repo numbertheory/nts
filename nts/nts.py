@@ -45,3 +45,16 @@ def check_for_journal(journal):
         with open(journal_path, "w") as journal_file:
             journal_file.write(json.dumps(blank_journal))
         return True
+
+def run_cli(args):
+    config_set = check_for_configuration(args)
+    if config_set.get(args.journal):
+        if args.debug:
+            debug_output(config_set, args)
+        journal_check = check_for_journal(config_set.get(args.journal))
+        if journal_check:
+            return [journal_check, 0]
+        else:
+            return ["Error creating journal at {}".format(args.journal), 1]
+    else:
+        return ["Journal not found: {}".format(args.journal), 1]

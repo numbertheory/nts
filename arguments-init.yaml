@@ -1,0 +1,36 @@
+description: Note To Self Initialization
+arguments:
+  - name: config
+    required: False
+    type: string
+    multiple: False
+    default: "~/.config/nts/config.toml"
+    flags:
+      - c
+      - config
+    help: "set path to config file"
+  - name: journal
+    required: False
+    type: string
+    multiple: False
+    default: "default"
+    flags:
+      - j
+      - journal
+    help: "select journal to read from"
+  - name: debug
+    required: False
+    type: boolean
+    default: False
+    flags:
+      - d
+      - debug
+    help: "debug mode"
+  - name: action
+    required: True
+    type: string
+    multiple: False
+    flags:
+      - a
+      - action
+    help: "initialization action"
