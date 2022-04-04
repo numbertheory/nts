@@ -45,6 +45,12 @@ class Arguments:
                     action=store_translate(arg.get("default")),
                     required=arg.get("required")
                 )
+            if arg.get("type") == "bare":
+                if arg.get("required"):
+                    nargs_value = 1
+                else:
+                    nargs_value = "?"
+                self.parser.add_argument(arg.get("name"), nargs=nargs_value)
 
     def value(self, dest):
         try:

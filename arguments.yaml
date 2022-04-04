@@ -1,5 +1,8 @@
 description: Note To Self (nts)
 arguments:
+  - name: notebody
+    required: False
+    type: bare
   - name: config
     required: False
     type: string
