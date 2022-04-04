@@ -19,6 +19,12 @@ class Config:
             self.default_subject = toml.load(self.file_path).get(self.journal).get("default_subject")
         except AttributeError:
             self.default_subject = None
+        try:
+            self.time_format = toml.load(self.file_path).get(self.journal).get(
+                "time_format", "%m/%d/%Y, %H:%M:%S")
+        except AttributeError:
+            self.time_format = "%m/%d/%Y, %H:%M:%S"
+
 
     def values(self):
         return toml.load(self.file_path)
