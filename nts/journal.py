@@ -4,11 +4,18 @@ import uuid
 import time, datetime
 import toml
 
+def default_subject(args):
+    return datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+
 def add(args):
     # Load the storage_path's json
     json_file = "{}/{}/journal.json".format(args.storage_path, args.journal)
-    with open(json_file, "r") as f:
-        journal = json.loads(f.read())
+    try:
+        with open(json_file, "r") as f:
+            journal = json.loads(f.read())
+    except FileNotFoundError:
+        print("Journal not found: {}".format(args.journal))
+        return False
     # Add post to journal JSON
     millisec = time.time_ns() // 1000000
     journal_post_path = "{}/{}/post_{}.toml".format(
@@ -20,7 +27,7 @@ def add(args):
         f.write(json.dumps(journal, indent=4, sort_keys=True))
     subject_content = args.subject
     if not subject_content:
-        subject_content = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        subject_content = default_subject(args)
     with open(journal_post_path, "w") as f:
         content = {
             "post":{
@@ -29,3 +36,4 @@ def add(args):
             }
         }
         f.write(toml.dumps(content))
+    return True

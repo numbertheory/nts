@@ -15,6 +15,10 @@ class Config:
         self.storage_path = os.path.expanduser("~/.local/share/nts")
         self.notebody = collect.Arguments(self.args).value("notebody")
         self.subject = collect.Arguments(self.args).value("subject")
+        try:
+            self.default_subject = toml.load(self.file_path).get(self.journal).get("default_subject")
+        except AttributeError:
+            self.default_subject = None
 
     def values(self):
         return toml.load(self.file_path)

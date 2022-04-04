@@ -10,9 +10,11 @@ def debug_output(config_set, args):
 
 if __name__ == "__main__":
     command = nts.run_cli(args)
+    if not command:
+        exit(1)
     if args.notebody:
         print("Adding to {}".format(args.journal))
-        journal.add(args)
+        command = journal.add(args)
     if command:
         exit(0)
     else:
