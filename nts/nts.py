@@ -12,7 +12,10 @@ class Config:
         self.journal = collect.Arguments(self.args).value("journal")
         self.debug = collect.Arguments(self.args).value("debug")
         self.action = collect.Arguments(self.args).value("action")
-        self.storage_path = os.path.expanduser("~/.local/share/nts")
+        try:
+            self.storage_path = os.path.dirname(os.path.dirname(toml.load(self.file_path).get(self.journal).get("journal_path")))
+        except AttributeError:
+            self.storage_path = os.path.expanduser("~/.local/share/nts")
         self.notebody = collect.Arguments(self.args).value("notebody")
         self.subject = collect.Arguments(self.args).value("subject")
         try:
@@ -54,7 +57,10 @@ def check_for_journal(journal):
         return True
     else:
         print("Creating journal at {}".format(journal_path))
-        os.makedirs(os.path.dirname(journal_path))
+        try:
+            os.makedirs(os.path.dirname(journal_path))
+        except FileExistsError:
+            pass
         blank_journal = {"posts": []}
         with open(journal_path, "w") as journal_file:
             journal_file.write(json.dumps(blank_journal))

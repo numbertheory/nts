@@ -5,7 +5,11 @@ import time, datetime
 import toml
 
 def default_subject(args):
-    return datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    ts = datetime.datetime.now().strftime(args.time_format)
+    if args.default_subject:
+        return args.default_subject.replace("$time", ts)
+    else:
+        return ts
 
 def add(args):
     # Load the storage_path's json
@@ -15,6 +19,7 @@ def add(args):
             journal = json.loads(f.read())
     except FileNotFoundError:
         print("Journal not found: {}".format(args.journal))
+        print(json_file)
         return False
     # Add post to journal JSON
     millisec = time.time_ns() // 1000000
