@@ -11,6 +11,5 @@ def debug_output(config_set, args):
 if __name__ == "__main__":
     command = nts.run_cli(args) # check for a config and create if needed
     if (args.action == "add"):
-        command = nts.add_notebook()
-    print(command[0])
+        command = nts.add_notebook(args)
     exit(command[1])

@@ -12,6 +12,7 @@ class Config:
         self.journal = collect.Arguments(self.args).value("journal")
         self.debug = collect.Arguments(self.args).value("debug")
         self.action = collect.Arguments(self.args).value("action")
+        self.storage_path = os.path.expanduser("~/.local/share/nts")
 
     def values(self):
         return toml.load(self.file_path)
@@ -21,7 +22,7 @@ def check_for_configuration(config):
     if os.path.isfile(config.file_path):
         return config.values()
     else:
-        default_journal_path = os.path.expanduser("~/.local/share/nts/default/journal.json")
+        default_journal_path = "{}/default/journal.json".format(config.storage_path)
         default_toml = {"default": {"journal_path": "{}".format(default_journal_path)}}
         user_set_path = input("Set path for config: [{}] ?".format(config.file_path))
         if not user_set_path:
@@ -61,5 +62,12 @@ def run_cli(args):
         return ["Journal not found: {}".format(args.journal), 1]
 
 
-def add_notebook():
+def add_notebook(args):
+    current_notebooks = toml.load(args.file_path)
+    new_notebook = input("New notebook name: ? ")
+    if new_notebook:
+        current_notebooks[new_notebook] = {
+            "journal_path": "{}/{}/journal.json".format(args.storage_path, new_notebook)}
+    with open(args.file_path, "w") as config_file:
+        config_file.write(toml.dumps(current_notebooks))
     return [0, 0]
