@@ -59,3 +59,7 @@ def run_cli(args):
             return ["Error creating journal at {}".format(args.journal), 1]
     else:
         return ["Journal not found: {}".format(args.journal), 1]
+
+
+def add_notebook():
+    return [0, 0]
