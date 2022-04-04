@@ -10,4 +10,7 @@ def debug_output(config_set, args):
 
 if __name__ == "__main__":
     command = nts.run_cli(args)
-    exit(command[1])
+    if command:
+        exit(0)
+    else:
+        exit(1)

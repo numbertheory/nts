@@ -57,9 +57,11 @@ def run_cli(args):
         if journal_check:
             return [journal_check, 0]
         else:
-            return ["Error creating journal at {}".format(args.journal), 1]
+            print("Error creating journal at {}".format(args.journal))
+            return False
     else:
-        return ["Journal not found: {}".format(args.journal), 1]
+        print("Journal not found: {}".format(args.journal))
+        return False
 
 
 def add_notebook(args):
