@@ -14,6 +14,7 @@ class Config:
         self.action = collect.Arguments(self.args).value("action")
         self.storage_path = os.path.expanduser("~/.local/share/nts")
         self.notebody = collect.Arguments(self.args).value("notebody")
+        self.subject = collect.Arguments(self.args).value("subject")
 
     def values(self):
         return toml.load(self.file_path)

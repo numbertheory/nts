@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-from nts import nts
+from nts import nts, journal
 import os
 
 
@@ -10,6 +10,9 @@ def debug_output(config_set, args):
 
 if __name__ == "__main__":
     command = nts.run_cli(args)
+    if args.notebody:
+        print("Adding to {}".format(args.journal))
+        journal.add(args)
     if command:
         exit(0)
     else:

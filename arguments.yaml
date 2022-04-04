@@ -3,6 +3,14 @@ arguments:
   - name: notebody
     required: False
     type: bare
+    help: the body of the note to take
+  - name: subject
+    type: string
+    required: False
+    flags:
+      - s
+      - subject
+    help: the subject of the note
   - name: config
     required: False
     type: string
