@@ -47,7 +47,10 @@ class Arguments:
                 )
 
     def value(self, dest):
-        arg_value = getattr(self.parser.parse_args(), dest)
+        try:
+            arg_value = getattr(self.parser.parse_args(), dest)
+        except AttributeError:
+            return None
         if type(arg_value) == list:
             if len(arg_value) == 1:
                 return arg_value[0]

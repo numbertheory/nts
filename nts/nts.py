@@ -11,6 +11,7 @@ class Config:
         self.file_path = os.path.expanduser(collect.Arguments(self.args).value("config"))
         self.journal = collect.Arguments(self.args).value("journal")
         self.debug = collect.Arguments(self.args).value("debug")
+        self.action = collect.Arguments(self.args).value("action")
 
     def values(self):
         return toml.load(self.file_path)
