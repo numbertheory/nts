@@ -4,6 +4,13 @@ arguments:
     required: False
     type: bare
     help: the body of the note to take
+  - name: list
+    type: boolean
+    required: False
+    flags:
+      - l
+      - list
+    help: list all posts for the notebook
   - name: subject
     type: string
     required: False

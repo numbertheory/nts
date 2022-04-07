@@ -12,6 +12,7 @@ class Config:
         self.journal = collect.Arguments(self.args).value("journal")
         self.debug = collect.Arguments(self.args).value("debug")
         self.action = collect.Arguments(self.args).value("action")
+        self.list = collect.Arguments(self.args).value("list")
         try:
             self.storage_path = os.path.dirname(os.path.dirname(toml.load(self.file_path).get(self.journal).get("journal_path")))
         except AttributeError:
