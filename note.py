@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 from nts import nts, journal
+from tabulate import tabulate
 import os
 
 
@@ -19,7 +20,7 @@ if __name__ == "__main__":
         command = journal.add(args)
     elif args.list:
         posts = journal.list(args)
-        print(posts)
+        print(tabulate(posts))
 
     if command:
         exit(0)

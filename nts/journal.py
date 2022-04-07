@@ -13,13 +13,15 @@ def default_subject(args):
 
 def list(args):
     list_source = "{}/{}/journal.json".format(args.storage_path, args.journal)
+    table = [['post', 'source']]
     with open(list_source, "r") as f:
         list_posts = json.loads(f.read())
 
     for post in list_posts['posts']:
-        print(post['journal_post_path'])
+        toml_file = toml.load(post['journal_post_path'])['post']
+        table.append([toml_file['subject'], toml_file['body']])
 
-    return list_posts['posts']
+    return table
 
 def add(args):
     # Load the storage_path's json
