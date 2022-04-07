@@ -11,6 +11,16 @@ def default_subject(args):
     else:
         return ts
 
+def list(args):
+    list_source = "{}/{}/journal.json".format(args.storage_path, args.journal)
+    with open(list_source, "r") as f:
+        list_posts = json.loads(f.read())
+
+    for post in list_posts['posts']:
+        print(post['journal_post_path'])
+
+    return list_posts['posts']
+
 def add(args):
     # Load the storage_path's json
     json_file = "{}/{}/journal.json".format(args.storage_path, args.journal)

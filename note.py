@@ -18,7 +18,9 @@ if __name__ == "__main__":
         print("Adding to {}".format(args.journal))
         command = journal.add(args)
     elif args.list:
-        print("List all posts for the {} notebook".format(args.journal))
+        posts = journal.list(args)
+        print(posts)
+
     if command:
         exit(0)
     else:
